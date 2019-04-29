@@ -13,11 +13,7 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public Article createArticle(Article article) {
-        return articleRepository.save(article);
-    }
-
-    public Article updateArticle(Article article) {
+    public Article saveArticle(Article article) {
         return articleRepository.save(article);
     }
 

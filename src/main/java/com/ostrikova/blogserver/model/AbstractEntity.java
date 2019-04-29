@@ -9,16 +9,16 @@ public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "unique_id")
-    private Long id;
+    private long id;
 
     @Column(name = "created_date")
     private Date createdDate;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

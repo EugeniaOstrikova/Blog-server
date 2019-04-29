@@ -2,9 +2,10 @@ package com.ostrikova.blogserver.model;
 
 import com.ostrikova.blogserver.util.Status;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "articles")
@@ -20,6 +21,26 @@ public class Article extends AbstractEntity {
 
     @Column(name = "status")
     private Status status;
+
+    @Column(name = "updated_date")
+    private Date updatedDate;
+
+    @ManyToMany
+    @JoinTable(name = "post_tag",
+            joinColumns = @JoinColumn(name = "post_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+        tag.addArticle(this);
+    }
+
+    public void removeTag(Tag tag) {
+        tags.remove(tag);
+        tag.getArticles().remove(this);
+    }
 
     public static class Builder {
         private String title;
@@ -45,11 +66,15 @@ public class Article extends AbstractEntity {
         }
     }
 
+    public Article() {}
+
     private Article(Builder builder) {
         title = builder.title;
         text = builder.text;
         userId = builder.userId;
         status = Status.DRAFT;
+        this.setCreatedDate(new Date());
+        this.setUpdatedDate(new Date());
     }
 
     public String getTitle () {
@@ -72,7 +97,7 @@ public class Article extends AbstractEntity {
         return userId;
     }
 
-    public void setUseId(long userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -82,5 +107,13 @@ public class Article extends AbstractEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate == null ? null : new Date(updatedDate.getTime());
     }
 }

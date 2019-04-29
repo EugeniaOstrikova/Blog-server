@@ -2,8 +2,6 @@ package com.ostrikova.blogserver.services;
 
 import com.ostrikova.blogserver.model.User;
 import com.ostrikova.blogserver.repository.UserRepository;
-import com.ostrikova.blogserver.AppException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

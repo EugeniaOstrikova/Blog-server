@@ -34,7 +34,7 @@ public class UserController {
         return new ResponseEntity<>(createdUser, headers, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/check/{email}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{email}/check", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> checkUserEmail(@PathVariable String email) {
         HttpHeaders headers = new HttpHeaders();
         User user = userService.findUser(email);
@@ -46,7 +46,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/login/{email}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{email}/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> loginUser(@PathVariable String email, @RequestBody String password) {
         HttpHeaders headers = new HttpHeaders();
         User user = userService.findUser(email);

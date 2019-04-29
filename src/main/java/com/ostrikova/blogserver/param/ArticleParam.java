@@ -1,15 +1,17 @@
 package com.ostrikova.blogserver.param;
 
-import com.ostrikova.blogserver.util.Status;
+import com.ostrikova.blogserver.model.Tag;
+
+import java.util.List;
 
 public class ArticleParam {
     private String title;
 
     private String text;
 
-    private Status status;
-
     private long userId;
+
+    public List<String> tags;
 
     public String getTitle() {
         return title;
@@ -27,19 +29,15 @@ public class ArticleParam {
         this.text = text;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public long getUserId() {
         return userId;
     }
 
     public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public List<String> getTags() {
+        return tags;
     }
 }
